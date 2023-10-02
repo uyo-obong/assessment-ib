@@ -19,7 +19,7 @@ class ValidateCardPaymentRequest extends FormRequest
     {
         return [
             'card_name' => 'required|min:3|max:50',
-            'card_number' => 'required|min:16|max:19',
+            'card_number' => 'required|min:15|max:19',
             'card_cvv' => 'required|min:3|max:4',
             'card_expiry_month' => 'required|numeric|between:1,12',
             'card_expiry_year' => 'required|numeric',
