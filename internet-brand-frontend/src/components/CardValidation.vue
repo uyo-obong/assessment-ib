@@ -31,10 +31,19 @@ const validationSuccess = ref({
 const router = useRouter();
 const handleValidation = () => {
     axios.post("http://127.0.0.1:8000/api/card/validation", validateCard).then((res) => {
-        console.log(res.data.message)
+
         validationSuccess.value.success = res.data.message
+
+        // Reset validationError values to null
+        for (const key in validationError.value) {
+            validationError.value[key] = null;
+        }
+
         router.push("/");
     }).catch((err) => {
+
+        // Reset validationSuccess to null
+        validationSuccess.value.success = null
 
         const errorMessages = err.response.data.message;
         for (const key in errorMessages) {
@@ -107,7 +116,7 @@ const handleValidation = () => {
                     </div>
 
                     <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
+                        <button class="btn btn-primary">Submit form</button>
                     </div>
                 </form>
             </div>
